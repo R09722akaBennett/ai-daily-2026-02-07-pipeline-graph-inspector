@@ -1,0 +1,60 @@
+Metadata-Version: 2.4
+Name: service-template
+Version: 0.1.0
+Summary: FastAPI + Streamlit complete service template
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: fastapi>=0.110
+Requires-Dist: uvicorn[standard]>=0.27
+Requires-Dist: pydantic>=2.6
+Requires-Dist: pydantic-settings>=2.2
+Requires-Dist: httpx>=0.26
+Requires-Dist: python-dotenv>=1.0
+Requires-Dist: structlog>=24.1
+Requires-Dist: rich>=13.7
+Requires-Dist: streamlit>=1.31
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"
+Requires-Dist: pytest-asyncio>=0.23; extra == "dev"
+Requires-Dist: ruff>=0.3; extra == "dev"
+Requires-Dist: mypy>=1.8; extra == "dev"
+
+# Pipeline Graph Inspector
+
+Validate and visualize simple pipeline definitions as a DAG, with linting and Mermaid export.
+
+## Inspiration / Sources
+
+- https://huggingface.co/blog/daggr
+
+## Architecture
+
+- FastAPI backend: `app/` (app factory + routers + services)
+- Streamlit UI: `app/web/streamlit_app.py`
+
+## Run (dev)
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -e '.[dev]'
+cp .env.example .env
+```
+
+Terminal A (API):
+
+```bash
+./scripts/dev_api.sh
+```
+
+Terminal B (UI):
+
+```bash
+./scripts/dev_ui.sh
+```
+
+## Smoke test
+
+```bash
+curl -s http://127.0.0.1:8000/api/health | python3 -m json.tool
+```
